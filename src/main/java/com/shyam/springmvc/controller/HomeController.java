@@ -1,0 +1,38 @@
+package com.shyam.springmvc.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.shyam.springmvc.model.Student;
+
+@Controller
+public class HomeController {
+
+	@ModelAttribute
+	public void modelData(Model m, Student s) {
+		m.addAttribute("name", s.getName());
+	}
+
+	@RequestMapping("/")
+	public String home() {
+		return "index";
+	}
+
+	@RequestMapping("add")
+	public String add(@RequestParam("num1") int i, @RequestParam("num2") int j, Model m) {
+
+		int num3 = i + j;
+		m.addAttribute("num3", num3);
+
+		return "result";
+	}
+
+	@RequestMapping("addStudent")
+	public String addStudent(@ModelAttribute("s1") Student s) {
+		return "result";
+	}
+
+}
